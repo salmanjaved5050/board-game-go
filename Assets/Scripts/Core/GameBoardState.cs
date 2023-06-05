@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using BoardGame.Utility;
+﻿using BoardGame.Utility;
 using UnityEngine;
-using Utility;
 
 namespace BoardGame.Core
 {
+    /// <summary>
+    /// Contains the game board state of all the slots on game board and is managed by game logic
+    /// </summary>
     internal class GameBoardState
     {
         private Vector2Int _boardSize;
@@ -64,6 +65,9 @@ namespace BoardGame.Core
         }
     }
 
+    /// <summary>
+    /// State of an individual slot on the game board
+    /// </summary>
     internal class BoardSlotState
     {
         private BoardSlotOwner _slotOwner;

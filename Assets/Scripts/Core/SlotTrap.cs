@@ -7,17 +7,28 @@ namespace BoardGame.Core
     internal class SlotTrap
     {
         private SlotLocation _trapOriginLocation;
+        private List<SlotLocation> _trapOffsets;
+        private SlotLocation _orthognalOffset;
         private Vector2Int _boardSize;
         private List<SlotLocation> _trapBoundries;
         private SlotLocation _trapTargetLocation;
 
-        protected List<SlotLocation> trapOffsets;
-        protected SlotLocation orthognalOffset;
-
-        internal SlotTrap(SlotLocation location, Vector2Int boardLimits)
+        /// <summary>
+        /// Creates a trap from a given slot location in the direction
+        /// depending on the offsets from the slot location
+        /// </summary>
+        /// <param name="slotLocation">The origin location of the trap from where boundries are calculated</param>
+        /// <param name="boardSize">The size of the game board</param>
+        /// <param name="trapOffsets">The offsets from which slot locations are calculated and boundries are defined</param>
+        /// <param name="orthognalOffset">The slot location of potential target stone to be captured, belonging to enemy</param>
+        internal SlotTrap(SlotLocation slotLocation, Vector2Int boardSize,List<SlotLocation> trapOffsets, SlotLocation orthognalOffset)
         {
-            _trapOriginLocation = location;
-            _boardSize = boardLimits;
+            _trapOriginLocation = slotLocation;
+            _boardSize = boardSize;
+            _trapOffsets = trapOffsets;
+            _orthognalOffset = orthognalOffset;
+            
+            InitializeTrap();
         }
 
         private bool IsSlotOnBoard(SlotLocation slotLocation)
@@ -25,13 +36,13 @@ namespace BoardGame.Core
             return (slotLocation.x >= 0 && slotLocation.y >= 0 && slotLocation.x < _boardSize.x && slotLocation.y < _boardSize.y);
         }
 
-        private List<SlotLocation> CreateTrapAroundOrigin()
+        private List<SlotLocation> CreateTrapBoundriesFromOrigin()
         {
             List<SlotLocation> slots = new List<SlotLocation>();
-            for (int i = 0; i < trapOffsets.Count; i++)
+            for (int i = 0; i < _trapOffsets.Count; i++)
             {
-                SlotLocation neighbour = new SlotLocation(_trapOriginLocation.x + trapOffsets[i]
-                    .x, _trapOriginLocation.y + trapOffsets[i]
+                SlotLocation neighbour = new SlotLocation(_trapOriginLocation.x + _trapOffsets[i]
+                    .x, _trapOriginLocation.y + _trapOffsets[i]
                     .y);
 
                 if (IsSlotOnBoard(neighbour))
@@ -42,122 +53,18 @@ namespace BoardGame.Core
 
             return slots;
         }
-
-        protected virtual void GenerateTrapOffsets() { }
-
-        protected virtual void InitializeTrap() { }
-
-        protected void SetupBoundries()
-        {
-            _trapBoundries = CreateTrapAroundOrigin();
-        }
         
+        private void InitializeTrap()
+        {
+            _trapBoundries = CreateTrapBoundriesFromOrigin();
+        }
+
         internal List<SlotLocation> GetTrapBoundries() => _trapBoundries;
 
         internal SlotLocation GetTargetLocation()
         {
-            SlotLocation targetLocation = new(_trapOriginLocation.x + orthognalOffset.x, _trapOriginLocation.y + orthognalOffset.y);
+            SlotLocation targetLocation = new(_trapOriginLocation.x + _orthognalOffset.x, _trapOriginLocation.y + _orthognalOffset.y);
             return IsSlotOnBoard(targetLocation) ? targetLocation : null;
-        }
-    }
-
-    internal class SlotTrapLeft : SlotTrap
-    {
-        internal SlotTrapLeft(SlotLocation location, Vector2Int boardLimits) : base(location, boardLimits)
-        {
-            InitializeTrap();
-        }
-
-        protected sealed override void InitializeTrap()
-        {
-            GenerateTrapOffsets();
-            SetupBoundries();
-        }
-
-        protected sealed override void GenerateTrapOffsets()
-        {
-            trapOffsets = new List<SlotLocation>()
-            {
-                new SlotLocation(-1, -1),
-                new SlotLocation(0, -2),
-                new SlotLocation(1, -1)
-            };
-            orthognalOffset = new SlotLocation(0, -1);
-        }
-    }
-    
-    internal class SlotTrapRight : SlotTrap
-    {
-        internal SlotTrapRight(SlotLocation location, Vector2Int boardLimits) : base(location, boardLimits)
-        {
-            InitializeTrap();
-        }
-
-        protected sealed override void InitializeTrap()
-        {
-            GenerateTrapOffsets();
-            SetupBoundries();
-        }
-
-        protected sealed override void GenerateTrapOffsets()
-        {
-            trapOffsets = new List<SlotLocation>()
-            {
-                new SlotLocation(-1, 1),
-                new SlotLocation(0, 2),
-                new SlotLocation(1, 1)
-            };
-            orthognalOffset = new SlotLocation(0, 1);
-        }
-    }
-    
-    internal class SlotTrapTop : SlotTrap
-    {
-        internal SlotTrapTop(SlotLocation location, Vector2Int boardLimits) : base(location, boardLimits)
-        {
-            InitializeTrap();
-        }
-
-        protected sealed override void InitializeTrap()
-        {
-            GenerateTrapOffsets();
-            SetupBoundries();
-        }
-
-        protected sealed override void GenerateTrapOffsets()
-        {
-            trapOffsets = new List<SlotLocation>()
-            {
-                new SlotLocation(-1, -1),
-                new SlotLocation(-2, 0),
-                new SlotLocation(-1, 1)
-            };
-            orthognalOffset = new SlotLocation(-1,0);
-        }
-    }
-    
-    internal class SlotTrapBottom : SlotTrap
-    {
-        internal SlotTrapBottom(SlotLocation location, Vector2Int boardLimits) : base(location, boardLimits)
-        {
-            InitializeTrap();
-        }
-
-        protected sealed override void InitializeTrap()
-        {
-            GenerateTrapOffsets();
-            SetupBoundries();
-        }
-
-        protected sealed override void GenerateTrapOffsets()
-        {
-            trapOffsets = new List<SlotLocation>()
-            {
-                new SlotLocation(1, -1),
-                new SlotLocation(2, 0),
-                new SlotLocation(1, 1)
-            };
-            orthognalOffset = new SlotLocation(1,0);
         }
     }
 }

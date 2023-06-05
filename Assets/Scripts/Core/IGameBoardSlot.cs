@@ -11,5 +11,7 @@ namespace BoardGame.Core
         void Init(GameBoard gameBoard, SlotLocation location);
 
         bool Occupied();
+
+        void Disable();
     }
 }

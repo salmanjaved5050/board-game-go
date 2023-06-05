@@ -6,10 +6,10 @@ namespace BoardGame.Utility
     {
         public static class BoardGameOffsets
         {
-            public static SlotLocation LeftOrthognalSlotOffset = new SlotLocation(0, -1);
-            public static SlotLocation RightOrthognalSlotOffset = new SlotLocation(0, 1);
-            public static SlotLocation TopOrthognalSlotOffset = new SlotLocation(-1, 0);
-            public static SlotLocation BottomOrthognalSlotOffset = new SlotLocation(1, 0);
+            public static readonly SlotLocation LeftOrthognalSlotOffset = new SlotLocation(0, -1);
+            public static readonly SlotLocation RightOrthognalSlotOffset = new SlotLocation(0, 1);
+            public static readonly SlotLocation TopOrthognalSlotOffset = new SlotLocation(-1, 0);
+            public static readonly SlotLocation BottomOrthognalSlotOffset = new SlotLocation(1, 0);
 
             public static readonly List<SlotLocation> LeftTrapOffsets = new List<SlotLocation>()
             {

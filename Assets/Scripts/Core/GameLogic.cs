@@ -6,6 +6,9 @@ using Utility;
 
 namespace BoardGame.Core
 {
+    /// <summary>
+    /// Controls the main game logic and state of the game board
+    /// </summary>
     internal class GameLogic
     {
         private GameBoardState _gameBoardState;
@@ -88,38 +91,47 @@ namespace BoardGame.Core
             return isStoneCaptureable;
         }
 
-        private void ProcessMoveAtLocation(SlotLocation location)
+        private void CheckForTraps(SlotLocation location)
         {
             BoardSlotOwner currentSlotOwner = _playerTurn == PlayerTurn.Player1 ? BoardSlotOwner.Player1 : BoardSlotOwner.Player2;
             BoardSlotOwner targetOwner = _playerTurn == PlayerTurn.Player1 ? BoardSlotOwner.Player2 : BoardSlotOwner.Player1;
 
-            SlotTrapLeft leftTrap = new SlotTrapLeft(location, _boardSize);
+            SlotTrap leftTrap = new SlotTrap(location, _boardSize, GameConstants.BoardGameOffsets.LeftTrapOffsets,
+                GameConstants.BoardGameOffsets.LeftOrthognalSlotOffset);
             if (CheckIfTrapCapturesEnemyStone(leftTrap, currentSlotOwner, targetOwner))
             {
                 _gameBoardState.SetOwnerAtSlot(leftTrap.GetTargetLocation(), BoardSlotOwner.None);
                 PlayerCapturedStone();
             }
 
-            SlotTrapRight rightTrap = new SlotTrapRight(location, _boardSize);
+            SlotTrap rightTrap = new SlotTrap(location, _boardSize, GameConstants.BoardGameOffsets.RightTrapOffsets,
+                GameConstants.BoardGameOffsets.RightOrthognalSlotOffset);
             if (CheckIfTrapCapturesEnemyStone(rightTrap, currentSlotOwner, targetOwner))
             {
                 _gameBoardState.SetOwnerAtSlot(rightTrap.GetTargetLocation(), BoardSlotOwner.None);
                 PlayerCapturedStone();
             }
 
-            SlotTrapTop topTrap = new SlotTrapTop(location, _boardSize);
+            SlotTrap topTrap = new SlotTrap(location, _boardSize, GameConstants.BoardGameOffsets.TopTrapOffsets,
+                GameConstants.BoardGameOffsets.TopOrthognalSlotOffset);
             if (CheckIfTrapCapturesEnemyStone(topTrap, currentSlotOwner, targetOwner))
             {
                 _gameBoardState.SetOwnerAtSlot(topTrap.GetTargetLocation(), BoardSlotOwner.None);
                 PlayerCapturedStone();
             }
 
-            SlotTrapBottom bottomTrap = new SlotTrapBottom(location, _boardSize);
+            SlotTrap bottomTrap = new SlotTrap(location, _boardSize, GameConstants.BoardGameOffsets.BottomTrapOffsets,
+                GameConstants.BoardGameOffsets.BottomOrthognalSlotOffset);
             if (CheckIfTrapCapturesEnemyStone(bottomTrap, currentSlotOwner, targetOwner))
             {
                 _gameBoardState.SetOwnerAtSlot(bottomTrap.GetTargetLocation(), BoardSlotOwner.None);
                 PlayerCapturedStone();
             }
+        }
+
+        private void ProcessMoveAtLocation(SlotLocation location)
+        {
+            CheckForTraps(location);
         }
 
         private void PlayerCapturedStone()

@@ -71,9 +71,10 @@ namespace BoardGame.Ui
             _gameInfoPanel.SetActive(true);
             _playButton.gameObject.SetActive(false);
         }
-
+        
         private void OnReplayButtonClicked()
         {
+            ResetGameInfo();
             _gameInfoPanel.SetActive(true);
             _replayButton.gameObject.SetActive(false);
             _winnerText.gameObject.SetActive(false);
@@ -86,7 +87,6 @@ namespace BoardGame.Ui
             _replayButton.gameObject.SetActive(true);
             _winnerText.text = winner + " Won!!!";
             _winnerText.gameObject.SetActive(true);
-            ResetGameInfo();
             _gameInfoPanel.SetActive(false);
         }
     }

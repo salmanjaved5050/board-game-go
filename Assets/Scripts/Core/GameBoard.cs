@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using BoardGame.Core.ScriptableObjects;
 using BoardGame.Utility;
@@ -137,7 +136,22 @@ namespace BoardGame.Core
             }
         }
 
-
+        private void DisableBoardSlots()
+        {
+            int xSize = _boardSlots.GetLength(0);
+            int ySize = _boardSlots.GetLength(1);
+            
+            for (int x = 0; x < xSize; x++)
+            {
+                for (int y = 0; y < ySize; y++)
+                {
+                    // get current slot and its state coming from logic then update the slot  
+                    IGameBoardSlot boardSlot = _boardSlots[x, y];
+                    boardSlot.Disable();
+                }
+            }
+        }
+        
         private void HighlightSlots(List<SlotLocation> slots)
         {
             for (int i = 0; i < slots.Count; i++)
@@ -160,6 +174,7 @@ namespace BoardGame.Core
 
                 if (_gameLogic.IsGameFinished())
                 {
+                    DisableBoardSlots();
                     Signals.Get<GameSignals.GameFinished>()
                         .Dispatch(_gameLogic.GetWinner());
                 }

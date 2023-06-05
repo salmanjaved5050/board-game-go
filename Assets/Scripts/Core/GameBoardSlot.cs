@@ -8,7 +8,8 @@ namespace BoardGame.Core
     {
         [SerializeField] private Color _highlightColor;
         [SerializeField] private bool _visualizeLocation;
-        
+
+        private Collider _collider;
         private bool _occupied;
         private Renderer _renderer;
         private GameBoard _gameBoard;
@@ -19,6 +20,7 @@ namespace BoardGame.Core
         private void Awake()
         {
             _renderer = GetComponent<Renderer>();
+            _collider = GetComponent<Collider>();
             _defaultColor = _renderer.material.color;
         }
 
@@ -50,6 +52,7 @@ namespace BoardGame.Core
         public void ResetSlot()
         {
             _occupied = false;
+            _collider.enabled = true;
             Destroy(_stone);
         }
 
@@ -61,6 +64,11 @@ namespace BoardGame.Core
         public bool Occupied()
         {
             return _occupied;
+        }
+
+        public void Disable()
+        {
+            _collider.enabled = false;
         }
         
         public void Init(GameBoard gameBoard, SlotLocation locationOnBoard)
