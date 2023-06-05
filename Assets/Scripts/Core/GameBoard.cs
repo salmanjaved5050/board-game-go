@@ -176,7 +176,9 @@ namespace BoardGame.Core
                 {
                     DisableBoardSlots();
                     Signals.Get<GameSignals.GameFinished>()
-                        .Dispatch(_gameLogic.GetWinner());
+                        .Dispatch();
+                    
+                    Signals.Get<GameSignals.GameWinner>().Dispatch(_gameLogic.GetWinner());
                 }
                 else
                 {

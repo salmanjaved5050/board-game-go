@@ -11,8 +11,10 @@ namespace BoardGame
 
         public class PlayerScoreChanged : Signal<PlayerTurn, int> { }
 
-        public class GameFinished : Signal<string> { }
+        public class GameFinished : Signal { }
 
         public class RestartGame : Signal { }
+
+        public class GameWinner : Signal<string> { }
     }
 }
