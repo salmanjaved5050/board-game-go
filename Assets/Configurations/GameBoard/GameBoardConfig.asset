@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d77ce0e423f4f37b9a1dd51162e65de, type: 3}
+  m_Name: GameBoardConfig
+  m_EditorClassIdentifier: 
+  GameBoardSize: {x: 12, y: 12}
+  BoardSlotPrefab: {fileID: 2266664614676325739, guid: 19ef5c9017cd36549a4c3f715f1ae344, type: 3}
+  Player1StonePrefab: {fileID: 5111757153966238262, guid: 13923636c07d5154e9b0590363417dcf, type: 3}
+  Player2StonePrefab: {fileID: 8088772506994467225, guid: e045e4b692fa9984e84b98c3388abb99, type: 3}

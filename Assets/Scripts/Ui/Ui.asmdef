@@ -1,0 +1,18 @@
+{
+    "name": "BoardGame.Ui",
+    "rootNamespace": "BoardGame",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:42e3bfb573e437b4199a0d5ad6c3fffb",
+        "GUID:f739cccec8ad5904bb4f24b4a5461544"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
