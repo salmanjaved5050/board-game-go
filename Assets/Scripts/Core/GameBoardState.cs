@@ -85,10 +85,10 @@ namespace BoardGame.Core
         }
     }
 
-    internal enum BoardSlotOwner
+    internal enum BoardSlotOwner : byte
     {
-        None,
-        Player1,
-        Player2
+        None = 0,
+        Player1 = 1,
+        Player2 = 2
     }
 }

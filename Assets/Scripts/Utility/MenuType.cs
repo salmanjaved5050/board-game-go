@@ -1,9 +1,9 @@
 namespace BoardGame.Utility
 {
-    public enum MenuType
+    public enum MenuType : byte
     {
-       MainMenu,
-       GameRound,
-       WinMenu
+       MainMenu = 0,
+       GameRound = 1,
+       WinMenu = 2
     }
 }
