@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace BoardGame.Core
 {
+    /// <summary>
+    /// This is just a utility class for testing out logic through unit testing
+    /// </summary>
     public class GameBoardUnitTestHelper
     {
         private readonly GameLogic _gameLogic;

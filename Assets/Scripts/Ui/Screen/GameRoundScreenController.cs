@@ -1,7 +1,7 @@
+using BoardGame.Utility;
 using Supyrb;
 using TMPro;
 using UnityEngine;
-using Utility;
 
 namespace BoardGame.Ui.Screen
 {

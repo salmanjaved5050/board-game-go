@@ -1,4 +1,4 @@
-﻿namespace Utility
+﻿namespace BoardGame.Utility
 {
     public enum PlayerTurn
     {

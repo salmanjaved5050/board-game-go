@@ -1,8 +1,6 @@
-using BoardGame.Utility;
 using Supyrb;
-using Utility;
 
-namespace BoardGame
+namespace BoardGame.Utility
 {
     public static class GameSignals
     {

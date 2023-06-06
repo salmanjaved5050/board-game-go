@@ -2,7 +2,6 @@
 using BoardGame.Utility;
 using Supyrb;
 using UnityEngine;
-using Utility;
 
 namespace BoardGame.Core
 {

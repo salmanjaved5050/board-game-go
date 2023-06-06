@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace BoardGame.Core
 {
+    /// <summary>
+    /// This class holds logic related to a single board slot
+    /// </summary>
     internal class GameBoardSlot : MonoBehaviour, IGameBoardSlot
     {
         [SerializeField] private Color _highlightColor;

@@ -3,10 +3,13 @@ using BoardGame.Core.ScriptableObjects;
 using BoardGame.Utility;
 using Supyrb;
 using UnityEngine;
-using Utility;
 
 namespace BoardGame.Core
 {
+    /// <summary>
+    /// This class controls the board slots,spawns them and updates them
+    /// according to the game state coming from game logic.
+    /// </summary>
     internal class GameBoard : MonoBehaviour
     {
         [SerializeField] private GameBoardConfig _gameBoardConfig;
