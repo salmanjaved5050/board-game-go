@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using BoardGame.Core.ScriptableObjects;
 using BoardGame.Utility;
@@ -14,9 +13,6 @@ namespace BoardGame.Core
 
         private IGameBoardSlot[,] _boardSlots;
         private GameLogic _gameLogic;
-
-        public static Action<PlayerTurn> PlayerTurnChanged;
-        public static Action<PlayerTurn, int> PlayerScoreChanged;
 
         private void OnEnable()
         {

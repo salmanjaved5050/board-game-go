@@ -202,5 +202,28 @@ namespace BoardGame.Core
             _playerTurn = _playerTurn == PlayerTurn.Player1 ? PlayerTurn.Player2 : PlayerTurn.Player1;
             return _gameBoardState.GetBoardState();
         }
+
+        #region Helper Methods For Unit Testing Prupose
+
+        internal void SetOwnersAtLocations(List<SlotLocation> locations, BoardSlotOwner slotOwner)
+        {
+            for (int i = 0; i < locations.Count; i++)
+            {
+                SetOwnerAtLocationAndCheckForCaptures(locations[i], slotOwner);
+            }
+        }
+
+        internal void SetOwnerAtLocationAndCheckForCaptures(SlotLocation location, BoardSlotOwner slotOwner)
+        {
+            _gameBoardState.SetOwnerAtSlot(location, slotOwner);
+            CheckForTraps(location);
+        }
+
+        internal bool CheckIfPlayer2LocationsAreEmpty(List<SlotLocation> locations, BoardSlotOwner boardSlotOwner)
+        {
+            return CheckIfSlotsAreOccupiedByOwner(locations, BoardSlotOwner.None);
+        }
+
+        #endregion
     }
 }
