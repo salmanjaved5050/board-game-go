@@ -45,6 +45,7 @@ namespace BoardGame.Core
                 }
             }
         }
+
         private void ResetBoardSlots()
         {
             int xSize = _boardSlots.GetLength(0);
@@ -94,6 +95,8 @@ namespace BoardGame.Core
         {
             ResetBoardSlots();
             _gameLogic.ResetGameLogic();
+            Signals.Get<GameSignals.PlayerTurnChanged>()
+                .Dispatch(PlayerTurn.Player1);
         }
 
         private void UpdateSlotState(IGameBoardSlot boardSlot, BoardSlotState slotState)
@@ -140,7 +143,7 @@ namespace BoardGame.Core
         {
             int xSize = _boardSlots.GetLength(0);
             int ySize = _boardSlots.GetLength(1);
-            
+
             for (int x = 0; x < xSize; x++)
             {
                 for (int y = 0; y < ySize; y++)
@@ -151,7 +154,7 @@ namespace BoardGame.Core
                 }
             }
         }
-        
+
         private void HighlightSlots(List<SlotLocation> slots)
         {
             for (int i = 0; i < slots.Count; i++)
@@ -166,7 +169,7 @@ namespace BoardGame.Core
         internal void BoardSlotClicked(SlotLocation location)
         {
             if (_gameLogic.IsGameFinished()) return;
-            
+
             if (_gameLogic.IsMoveValidAtLocation(location))
             {
                 BoardSlotState[,] state = _gameLogic.GetBoardState();
@@ -175,10 +178,10 @@ namespace BoardGame.Core
                 if (_gameLogic.IsGameFinished())
                 {
                     DisableBoardSlots();
-                    Signals.Get<GameSignals.GameFinished>()
-                        .Dispatch();
-                    
-                    Signals.Get<GameSignals.GameWinner>().Dispatch(_gameLogic.GetWinner());
+                    Signals.Get<GameSignals.ShowMenu>()
+                        .Dispatch(MenuType.WinMenu);
+                    Signals.Get<GameSignals.GameWinner>()
+                        .Dispatch(_gameLogic.GetWinner());
                 }
                 else
                 {

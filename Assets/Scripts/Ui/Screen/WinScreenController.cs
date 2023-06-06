@@ -1,4 +1,4 @@
-using System;
+using BoardGame.Utility;
 using Supyrb;
 using TMPro;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace BoardGame.Ui.Screen
 {
-    public class WinScreenController : MonoBehaviour
+    public class WinScreenController : UiMenu
     {
         [SerializeField] private Button _replayButton;
         [SerializeField] private TMP_Text _winnerText;
@@ -29,6 +29,7 @@ namespace BoardGame.Ui.Screen
         {
             Signals.Get<GameSignals.RestartGame>()
                 .Dispatch();
+            Signals.Get<GameSignals.ShowMenu>().Dispatch(MenuType.GameRound);
         }
 
         private void OnGameWinnerChosen(string winner)

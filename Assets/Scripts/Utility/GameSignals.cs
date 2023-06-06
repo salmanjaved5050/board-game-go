@@ -1,3 +1,4 @@
+using BoardGame.Utility;
 using Supyrb;
 using Utility;
 
@@ -11,10 +12,12 @@ namespace BoardGame
 
         public class PlayerScoreChanged : Signal<PlayerTurn, int> { }
 
-        public class GameFinished : Signal { }
-
         public class RestartGame : Signal { }
 
         public class GameWinner : Signal<string> { }
+
+        public class ShowMenu : Signal<MenuType> { }
+
+        public class HideMenu : Signal<MenuType> { }
     }
 }

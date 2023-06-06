@@ -29,7 +29,7 @@ namespace BoardGame.Core
             _gameBoardState = new GameBoardState(boardSize);
         }
 
-        private bool IsSlotOnBoard(SlotLocation slotLocation)
+        private bool IsSlotLocationOnBoard(SlotLocation slotLocation)
         {
             return (slotLocation.x >= 0 && slotLocation.y >= 0 && slotLocation.x < _boardSize.x && slotLocation.y < _boardSize.y);
         }
@@ -44,7 +44,7 @@ namespace BoardGame.Core
                     .x, slotLocation.y + offsets[i]
                     .y);
 
-                if (IsSlotOnBoard(neighbour))
+                if (IsSlotLocationOnBoard(neighbour))
                 {
                     neighbours.Add(neighbour);
                 }
@@ -79,7 +79,7 @@ namespace BoardGame.Core
             if (CheckIfTrapIsFormedByOwner(trap.GetTrapBoundries(), currentSlotOwner))
             {
                 SlotLocation targetLocation = trap.GetTargetLocation();
-                if (targetLocation != null)
+                if (IsSlotLocationOnBoard(targetLocation))
                 {
                     if (_gameBoardState.GetOwnerAtSlot(targetLocation) == targetOwner)
                     {
@@ -167,7 +167,7 @@ namespace BoardGame.Core
 
         internal bool IsGameFinished()
         {
-            return _player1Score == 3 || _player2Score == 3;
+            return _player1Score >= 3 || _player2Score >= 3;
         }
 
         internal string GetWinner()

@@ -5,7 +5,7 @@ using Utility;
 
 namespace BoardGame.Ui.Screen
 {
-    public class GameRoundScreenController : MonoBehaviour
+    public class GameRoundScreenController : UiMenu
     {
         [SerializeField] private TMP_Text _playerTurnText;
         [SerializeField] private TMP_Text _player1ScoreText;
@@ -42,6 +42,18 @@ namespace BoardGame.Ui.Screen
             {
                 _player2ScoreText.text = "Player 2 : " + score;
             }
+        }
+
+        private void ResetPlayerScoresAndTurn()
+        {
+            _playerTurnText.text = "Player1";
+            _player1ScoreText.text = "Player 1 : 0";
+            _player2ScoreText.text = "Player 2 : 0";
+        }
+
+        public override void ResetMenu()
+        {
+            ResetPlayerScoresAndTurn();
         }
     }
 }

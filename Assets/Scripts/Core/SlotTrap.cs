@@ -64,7 +64,7 @@ namespace BoardGame.Core
         internal SlotLocation GetTargetLocation()
         {
             SlotLocation targetLocation = new(_trapOriginLocation.x + _orthognalOffset.x, _trapOriginLocation.y + _orthognalOffset.y);
-            return IsSlotOnBoard(targetLocation) ? targetLocation : null;
+            return targetLocation;
         }
     }
 }

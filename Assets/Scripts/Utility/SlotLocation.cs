@@ -1,6 +1,6 @@
 ﻿namespace BoardGame.Utility
 {
-    public class SlotLocation
+    public struct SlotLocation
     {
         private int _x;
         private int _y;
