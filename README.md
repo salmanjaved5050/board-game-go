@@ -28,9 +28,7 @@ board from **GameLogic** and applies to the board itself i.e. update the state o
 
 <br />
 
-
-<img width="419" alt="Screenshot 2023-06-06 211414" src="https://github.com/salmanjaved5050/board-game-go/assets/50775485/3ea82da6-9cc9-4894-abc7-d1a360d33721">
-
+![Screenshot 2023-06-07 164136](https://github.com/salmanjaved5050/board-game-go/assets/50775485/c4952c7f-718c-4539-9a82-29457d8ff3c6)
 <br />
 
 ### GameBoardSlot
