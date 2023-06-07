@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BoardGame.Utility;
 using Supyrb;
 using UnityEngine;
@@ -128,7 +129,7 @@ namespace BoardGame.Core
             }
         }
 
-        private void ProcessMoveAtLocation(SlotLocation location)
+        private void EvaluateMoveAtLocationAndUpdateGameState(SlotLocation location)
         {
             CheckForTraps(location);
         }
@@ -149,16 +150,6 @@ namespace BoardGame.Core
                 .Dispatch(_playerTurn, score);
         }
 
-        internal List<List<SlotLocation>> GetTrapNeighbours(SlotLocation location)
-        {
-            List<List<SlotLocation>> offsets = new List<List<SlotLocation>>();
-            offsets.Add(GetOffsetSlotsAroundLocation(location, GameConstants.BoardGameOffsets.LeftTrapOffsets));
-            offsets.Add(GetOffsetSlotsAroundLocation(location, GameConstants.BoardGameOffsets.RightTrapOffsets));
-            offsets.Add(GetOffsetSlotsAroundLocation(location, GameConstants.BoardGameOffsets.TopTrapOffsets));
-            offsets.Add(GetOffsetSlotsAroundLocation(location, GameConstants.BoardGameOffsets.BottomTrapOffsets));
-            return offsets;
-        }
-
         internal PlayerTurn GetCurrentPlayerTurn()
         {
             return _playerTurn;
@@ -169,9 +160,19 @@ namespace BoardGame.Core
             return _player1Score >= 3 || _player2Score >= 3;
         }
 
-        internal string GetWinner()
+        internal string GetWinner(bool isGameForfeitByPlayer = false)
         {
-            return _player1Score > _player2Score ? "Player 1" : "Player 2";
+            string winner;
+            if (isGameForfeitByPlayer)
+            {
+                winner = _playerTurn == PlayerTurn.Player1 ? "Player 2" : "Player 1";
+            }
+            else
+            {
+                winner = _player1Score > _player2Score ? "Player 1" : "Player 2";
+            }
+
+            return winner;
         }
 
         internal bool IsMoveValidAtLocation(SlotLocation location)
@@ -182,7 +183,7 @@ namespace BoardGame.Core
                 BoardSlotOwner owner = _playerTurn == PlayerTurn.Player1 ? BoardSlotOwner.Player1 : BoardSlotOwner.Player2;
                 _gameBoardState.SetOwnerAtSlot(location, owner);
 
-                ProcessMoveAtLocation(location);
+                EvaluateMoveAtLocationAndUpdateGameState(location);
             }
 
             return isMoveValid;

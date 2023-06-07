@@ -23,6 +23,8 @@ namespace BoardGame.Core
                 .AddListener(InitializeGameBoard);
             Signals.Get<GameSignals.RestartGame>()
                 .AddListener(ResetGameBoard);
+            Signals.Get<GameSignals.ForfeitGame>()
+                .AddListener(OnPlayerForfeitGame);
         }
 
         private void OnDisable()
@@ -31,6 +33,8 @@ namespace BoardGame.Core
                 .RemoveListener(InitializeGameBoard);
             Signals.Get<GameSignals.RestartGame>()
                 .RemoveListener(ResetGameBoard);
+            Signals.Get<GameSignals.ForfeitGame>()
+                .RemoveListener(OnPlayerForfeitGame);
         }
 
         private void SpawnBoardSlots()
@@ -72,6 +76,14 @@ namespace BoardGame.Core
             slot.Init(this, slotLocation);
 
             return slot as GameBoardSlot;
+        }
+
+        private void OnPlayerForfeitGame()
+        {
+            Signals.Get<GameSignals.ShowMenu>()
+                .Dispatch(MenuType.WinMenu);
+            Signals.Get<GameSignals.GameWinner>()
+                .Dispatch(_gameLogic.GetWinner(true));
         }
 
         private void InitializeGameBoard()
@@ -147,28 +159,14 @@ namespace BoardGame.Core
             {
                 for (int y = 0; y < ySize; y++)
                 {
-                    // get current slot and its state coming from logic then update the slot  
                     IGameBoardSlot boardSlot = _boardSlots[x, y];
                     boardSlot.Disable();
                 }
             }
         }
 
-        private void HighlightSlots(List<SlotLocation> slots)
-        {
-            for (int i = 0; i < slots.Count; i++)
-            {
-                _boardSlots[slots[i]
-                        .x, slots[i]
-                        .y]
-                    .Highlight();
-            }
-        }
-
         internal void BoardSlotClicked(SlotLocation location)
         {
-            if (_gameLogic.IsGameFinished()) return;
-
             if (_gameLogic.IsMoveValidAtLocation(location))
             {
                 BoardSlotState[,] state = _gameLogic.GetBoardState();

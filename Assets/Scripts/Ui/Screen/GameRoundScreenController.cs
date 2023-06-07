@@ -2,6 +2,7 @@ using BoardGame.Utility;
 using Supyrb;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BoardGame.Ui.Screen
 {
@@ -10,6 +11,7 @@ namespace BoardGame.Ui.Screen
         [SerializeField] private TMP_Text _playerTurnText;
         [SerializeField] private TMP_Text _player1ScoreText;
         [SerializeField] private TMP_Text _player2ScoreText;
+        [SerializeField] private Button _forfeitButton;
         
         private void OnEnable()
         {
@@ -17,6 +19,7 @@ namespace BoardGame.Ui.Screen
                 .AddListener(OnPlayerTurnChagned);
             Signals.Get<GameSignals.PlayerScoreChanged>()
                 .AddListener(OnPlayerScoreChanged);
+            _forfeitButton.onClick.AddListener(OnForfeitButtonClicked);
         }
 
         private void OnDisable()
@@ -25,6 +28,7 @@ namespace BoardGame.Ui.Screen
                 .RemoveListener(OnPlayerTurnChagned);
             Signals.Get<GameSignals.PlayerScoreChanged>()
                 .RemoveListener(OnPlayerScoreChanged);
+            _forfeitButton.onClick.RemoveListener(OnForfeitButtonClicked);
         }
         
         private void OnPlayerTurnChagned(PlayerTurn playerTurn)
@@ -44,6 +48,12 @@ namespace BoardGame.Ui.Screen
             }
         }
 
+        private void OnForfeitButtonClicked()
+        {
+            Signals.Get<GameSignals.ForfeitGame>().Dispatch();
+            ResetPlayerScoresAndTurn();
+        }
+        
         private void ResetPlayerScoresAndTurn()
         {
             _playerTurnText.text = "Player1";

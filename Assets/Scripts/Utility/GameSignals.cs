@@ -12,6 +12,8 @@ namespace BoardGame.Utility
 
         public class RestartGame : Signal { }
 
+        public class ForfeitGame : Signal { }
+
         public class GameWinner : Signal<string> { }
 
         public class ShowMenu : Signal<MenuType> { }
