@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using BoardGame.Core.ScriptableObjects;
 using BoardGame.Utility;
 using Supyrb;
@@ -169,6 +168,7 @@ namespace BoardGame.Core
         {
             if (_gameLogic.IsMoveValidAtLocation(location))
             {
+                // if a move is valid at current slot location, then after its done get the latest state of the board
                 BoardSlotState[,] state = _gameLogic.GetBoardState();
                 ApplyBoardState(state);
 

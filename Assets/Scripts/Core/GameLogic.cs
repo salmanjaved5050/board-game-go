@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BoardGame.Utility;
 using Supyrb;
 using UnityEngine;
@@ -150,6 +149,11 @@ namespace BoardGame.Core
                 .Dispatch(_playerTurn, score);
         }
 
+        private void ChangePlayerTurn()
+        {
+            _playerTurn = _playerTurn == PlayerTurn.Player1 ? PlayerTurn.Player2 : PlayerTurn.Player1;
+        }
+        
         internal PlayerTurn GetCurrentPlayerTurn()
         {
             return _playerTurn;
@@ -177,16 +181,17 @@ namespace BoardGame.Core
 
         internal bool IsMoveValidAtLocation(SlotLocation location)
         {
-            bool isMoveValid = _gameBoardState.CheckIfSlotFree(location);
-            if (isMoveValid)
+            bool isSlotFree = _gameBoardState.CheckIfSlotFree(location);
+            if (isSlotFree)
             {
                 BoardSlotOwner owner = _playerTurn == PlayerTurn.Player1 ? BoardSlotOwner.Player1 : BoardSlotOwner.Player2;
                 _gameBoardState.SetOwnerAtSlot(location, owner);
 
                 EvaluateMoveAtLocationAndUpdateGameState(location);
+                ChangePlayerTurn();
             }
 
-            return isMoveValid;
+            return isSlotFree;
         }
 
         internal void ResetGameLogic()
@@ -199,7 +204,6 @@ namespace BoardGame.Core
 
         internal BoardSlotState[,] GetBoardState()
         {
-            _playerTurn = _playerTurn == PlayerTurn.Player1 ? PlayerTurn.Player2 : PlayerTurn.Player1;
             return _gameBoardState.GetBoardState();
         }
 
