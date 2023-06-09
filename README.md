@@ -5,7 +5,8 @@ trap of the opponent stones.
 
 <br />
 
-![Image Sequence_001_0000](https://github.com/salmanjaved5050/board-game-go/assets/50775485/470ca229-2158-4035-8bfd-7a1e8926416b)
+
+![1](https://github.com/salmanjaved5050/board-game-go/assets/50775485/b378e251-8e25-4ccc-a5a2-99832affaf48)
 
 
 # How It Works
@@ -17,7 +18,7 @@ reference to **GameLogic** type object which controls the inner logic of the gam
 
 <br />
 
-<img width="438" alt="Screenshot 2023-06-06 205003" src="https://github.com/salmanjaved5050/board-game-go/assets/50775485/0994b2fc-1661-4981-9213-7d364ccf5a10">
+![2](https://github.com/salmanjaved5050/board-game-go/assets/50775485/66958ca0-3fb6-4798-a32c-47d4ec0889ca)
 
 <br />
 <br />
@@ -28,9 +29,7 @@ board from **GameLogic** and applies to the board itself i.e. update the state o
 
 <br />
 
-
-<img width="419" alt="Screenshot 2023-06-06 211414" src="https://github.com/salmanjaved5050/board-game-go/assets/50775485/3ea82da6-9cc9-4894-abc7-d1a360d33721">
-
+![3](https://github.com/salmanjaved5050/board-game-go/assets/50775485/6191349a-0705-47f6-8e56-b6c4b5d23a83)
 <br />
 
 ### GameBoardSlot
@@ -46,7 +45,8 @@ then enemy stones are captrued.
 
 <br />
 
-<img width="759" alt="Screenshot 2023-06-06 211414" src="https://github.com/salmanjaved5050/board-game-go/assets/50775485/cf7b95be-9474-49fc-a24c-9890c72a7dd4">
+![4](https://github.com/salmanjaved5050/board-game-go/assets/50775485/5571c9fc-2b59-416f-9bc5-2a8b1344951c)
+
 
 ### SlotTrap
 This class manages a single trap that can be formed on any of the four sides of the stone that is placed by a player i.e. **Left, Right, Top**
@@ -57,7 +57,8 @@ on board. Each trap also has a target location i.e. enemy stone location and cap
 
 <br />
 
-<img width="677" alt="Screenshot 2023-06-06 211414" src="https://github.com/salmanjaved5050/board-game-go/assets/50775485/40dc9815-f98f-4f35-8187-98673494bfbe">
+![5](https://github.com/salmanjaved5050/board-game-go/assets/50775485/d50e2739-91ce-40e6-845c-3d74465cfea6)
+
 
 ## GameBoardState
 This class maintains the game board state i.e state of all individual slots. After each move this is updated by the **GameLogic** class.
